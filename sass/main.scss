@@ -1,0 +1,107 @@
+@import 'colors';
+
+:root {
+    font-family: 'Source Sans Pro', Helvetica, sans-serif;
+    font-size: 24px;
+    background-color: $bg;
+    color: $fg;
+}
+
+header {
+    text-align: center;
+
+    h1, h2 {
+        text-align: center;
+        font-weight: inherit;
+        margin: 0;
+        padding: 0.5em;
+    }
+}
+
+main {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    perspective: 1000px;
+}
+
+@mixin card-color ($color) {
+    header {
+        background-color: $color;
+    }
+
+    footer a {
+        background-color: $color;
+
+        &:active {
+            background-color: darken($color, 10%);
+        }
+    }
+}
+
+.card {
+    width: 15em;
+    margin: 1em;
+    border-radius: 3px;
+    overflow: hidden;
+    background-color: white;
+    box-shadow: 0 0 15px $shadow;
+    transition: transform 0.15s ease-out;
+    @include card-color($gray);
+
+    header {
+        color: white;
+    }
+
+    ul {
+        list-style-type: square;
+        margin: 1em 2em;
+    }
+
+    footer {
+        display: flex;
+        flex-direction: column;
+
+        .price {
+            font-size: 2em;
+            text-align: center;
+            margin: 0.25em;
+        }
+
+        a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5em;
+            text-align: center;
+            margin: 0.25em;
+            border-radius: 3px;
+            transition: background-color 0.1s linear;
+            box-shadow: 0 0 8px $shadow;
+        }
+    }
+
+    &.green {
+        @include card-color($green);
+    }
+
+    &.blue {
+        @include card-color($blue);
+    }
+
+    &:first-child {
+        transform: translateZ(-20px) rotateY(-3deg);
+    }
+
+    &:nth-child(2) {
+        transform: translateZ(10px);
+    }
+
+    &:last-child {
+        transform: translateZ(-20px) rotateY(3deg);
+    }
+
+    &:hover {
+        transform: translateZ(30px);
+    }
+}
